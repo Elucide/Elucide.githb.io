@@ -1,22 +1,7 @@
+
 <!doctype html>
 <html>
 	<head>
-		<p id="GFG_UP" style="font-size: 16px;
-					  font-weight: bold;">
-		</p>
-		<button onclick="changeMode()">Dark mode</button>
-		<script>
-			function changeMode() {
-				var body = document.getElementsByTagName("body")[0];
-				if (body.style.backgroundColor === "") {
-					body.style.backgroundColor = "black";
-					document.getElementsByTagName("button")[0].innerHTML = "Light mode";
-				} else {
-					body.style.backgroundColor = "";
-					document.getElementsByTagName("button")[0].innerHTML = "Dark mode";
-				}
-			}
-		</script>
 		<title>E L U C I D E</title>
 		<div class="titre">
 			<h1>E<sub>LUCID</sub>E</h1>
@@ -27,28 +12,53 @@
 			<span><a href="https://distrokid.com/hyperfollow/elucide/lcd" >music stuff</a></span>
 			<span>|</span>
 			<span><a href="https://github.com/elucide" >github</a></span>
-			<span>|</span>
-			<span><a href="/shitty_fractal.html" class="active">shitty fractal</a></span>
 		</nav>
 		<div class="sous-titre">
-			<i>nothing fancy just pure swag !</i>
+			<i>this animation has been made by chat gpt, and it's so bad I had to put it on the zebsite</i>
 		</div>
 	</head>
 	<hr>	
 	<body>
 		<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-			<div style="width: 350px; height: 400px">
-				<img src="tetsuo.png" alt="love using this picture caus I love Akira" style="width: 275px; height: 400px;">
-			</div>
-			<p class="main_text" style="width: 700px; height:400px;">
-			Hey ! My name is <b>Elucide</b>, I live in Paris, I'm currently studying CS at 42 Paris :)
+
+			<canvas id="canvas"></canvas>
+			<script>
+				// Set up the canvas
+				const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Define the fractal function
+function fractal(x, y, size) {
+	if (size < 1) {
+		return;
+	}
+	ctx.beginPath();
+	ctx.arc(x, y, size, 0, 2 * Math.PI);
+	ctx.stroke();
+	fractal(x + size, y, size / 2);
+	fractal(x - size, y, size / 2);
+	fractal(x, y + size, size / 2);
+	fractal(x, y - size, size / 2);
+}
+
+// Animate the fractal
+let size = 200;
+let delta = -1;
+function animate() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	fractal(canvas.width / 2, canvas.height / 2, size);
+	size += delta;
+	if (size < 10 || size > 200) {
+		delta *= -1;
+	}
+	requestAnimationFrame(animate);
+}
+animate();
+			</script>
 
 
-			<br><br>As u can see web is my main passion :))))
-			I love coding stuff in multiple language and I also try to make music (you can listen to it <a href=https://distrokid.com/hyperfollow/elucide/lcd>here</a> :>)
-			<br><br>
-			In this website you might find (useless) stuff that I do on the internet or on my personal computer !
-			</p>
 		</div>
 	</body>
 	<hr>
